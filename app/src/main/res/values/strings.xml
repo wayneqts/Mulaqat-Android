@@ -52,4 +52,16 @@
     <string name="logout">Logout</string>
     <string name="delete_account">Delete Account</string>
     <string name="no_notifications">No Notifications</string>
+    <string name="search_url">http://www.mulaqat.app/search.php</string>
+    <string name="blog_url">https://mulaqat.app/blog/</string>
+    <string name="united_states">United States</string>
+    <string name="permission_access_device_image_denied">Permission Access Device Image denied</string>
+    <string name="permission_access_camera_denied">Permission access camera denied</string>
+    <string name="name_is_required">Name is required</string>
+    <string name="age_is_required">Age is required</string>
+    <string name="contact_number_is_required">Contact Number is required</string>
+    <string name="city_is_required">City is required</string>
+    <string name="state_is_required">State is required</string>
+    <string name="zipcode_is_required">ZipCode is required</string>
+    <string name="photo_is_required">Photo is required</string>
 </resources>
