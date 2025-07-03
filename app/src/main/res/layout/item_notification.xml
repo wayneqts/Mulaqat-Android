@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_seen"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/bg_green_radius" />
+    <TextView
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="5dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:fontFamily="@font/inter_semibold"
+        android:id="@+id/tv_mess"
+        android:layout_toEndOf="@id/rl_seen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_below="@id/tv_mess"
+        android:textColor="@color/vang"
+        android:textSize="12sp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/tv_date_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <View
+        android:layout_marginTop="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_below="@id/tv_date_create"
+        android:background="@color/grey"/>
+</RelativeLayout>

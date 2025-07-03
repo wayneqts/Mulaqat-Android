@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorAccent">@color/red</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="android:windowDisablePreview">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+</resources>
