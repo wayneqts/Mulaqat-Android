@@ -2,6 +2,8 @@ package com.mulaqat.app.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -103,21 +105,15 @@ class MainActivity : BaseActivity() {
         }
         binding.mnLogin.setOnClickListener {
             binding.main.closeDrawer(GravityCompat.START)
-            startActivity(
-                Intent(
-                    this,
-                    SignIn::class.java
-                )
-            )
+            Handler(Looper.getMainLooper()).postDelayed({
+                startActivity(Intent(this, SignIn::class.java))
+            }, 300)
         }
         binding.mnJoin.setOnClickListener {
             binding.main.closeDrawer(GravityCompat.START)
-            startActivity(
-                Intent(
-                    this,
-                    SignUp::class.java
-                )
-            )
+            Handler(Looper.getMainLooper()).postDelayed({
+                startActivity(Intent(this, SignUp::class.java))
+            }, 300)
         }
         binding.mnNoti.setOnClickListener {
             if (pref.getPf() != null){
@@ -137,7 +133,9 @@ class MainActivity : BaseActivity() {
                 }
             } else {
                 binding.main.closeDrawer(GravityCompat.START)
-                startActivityForResult(Intent(this, SignUp::class.java), 123)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity(Intent(this, SignUp::class.java))
+                }, 300)
             }
         }
         binding.mnMess.setOnClickListener {
@@ -158,7 +156,9 @@ class MainActivity : BaseActivity() {
                 }
             } else {
                 binding.main.closeDrawer(GravityCompat.START)
-                startActivityForResult(Intent(this, SignUp::class.java), 123)
+                Handler(Looper.getMainLooper()).postDelayed({
+                    startActivity(Intent(this, SignUp::class.java))
+                }, 300)
             }
         }
         binding.mnSearch.setOnClickListener {

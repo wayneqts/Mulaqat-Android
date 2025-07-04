@@ -55,6 +55,7 @@
         app:endIconMode="clear_text"
         app:hintEnabled="false">
         <com.google.android.material.textfield.TextInputEditText
+            android:singleLine="true"
             android:id="@+id/et_email"
             android:textSize="@dimen/sp_14"
             android:padding="@dimen/dp_10"
@@ -85,6 +86,7 @@
         app:endIconMode="password_toggle"
         app:hintEnabled="false">
         <com.google.android.material.textfield.TextInputEditText
+            android:singleLine="true"
             android:inputType="textPassword"
             android:id="@+id/et_pw"
             android:textSize="@dimen/sp_14"

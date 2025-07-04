@@ -25,8 +25,10 @@ import com.mulaqat.app.activities.BaseActivity
 import com.mulaqat.app.activities.MainActivity
 import com.mulaqat.app.databinding.ActivitySignUpBinding
 import com.mulaqat.app.helper.CustomSpinnerAdapter
+import com.mulaqat.app.model.Profile
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -283,10 +285,55 @@ class SignUp : BaseActivity() {
                 if (response.isSuccessful) {
                     try {
                         jsonObject = JSONObject(response.body().toString())
+                        if (jsonObject.optBoolean("success")) {
+                            login()
+                            Toast.makeText(this@SignUp, jsonObject.optString("Message"), Toast.LENGTH_SHORT).show()
+                        }else{
+                            val arrErr = jsonObject.optJSONArray("errors");
+                            Toast.makeText(this@SignUp, arrErr.get(0).toString(), Toast.LENGTH_SHORT).show()
+                            tool.hideLoading()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+                tool.hideLoading()
+                Toast.makeText(this@SignUp, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // login
+    private fun login() {
+        val rqBody: RequestBody = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
+            .addFormDataPart("email", binding.etEmail.text.toString().trim())
+            .addFormDataPart("password", binding.etPw.text.toString().trim())
+            .build()
+
+        api.callApiWithBody("login_api.php", rqBody).enqueue(object : Callback<JsonObject> {
+            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+                val jsonObject: JSONObject
+                if (response.isSuccessful) {
+                    try {
+                        jsonObject = JSONObject(response.body().toString())
                         if (jsonObject.optBoolean("Status")) {
+                            val jsData = jsonObject.optJSONObject("data")
+                            val pf = Profile(
+                                jsData.optString("id"),
+                                jsData.optString("name"),
+                                jsData.optString("phone"),
+                                jsData.optString("email"),
+                                jsData.optString("password"),
+                                jsData.optString("IMEI"),
+                                jsData.optString("created")
+                            )
+                            pref.setPf(pf)
                             startActivity(Intent(this@SignUp, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                         }
-                        Toast.makeText(this@SignUp, jsonObject.optString("Message"), Toast.LENGTH_SHORT).show()
                     } catch (e: JSONException) {
                         e.printStackTrace()
                     }

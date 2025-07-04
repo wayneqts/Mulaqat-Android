@@ -49,14 +49,13 @@ class SignIn : BaseActivity() {
             .addFormDataPart("password", binding.etPw.text.toString().trim())
             .build()
 
-        api.callApiWithBody("login.php", rqBody).enqueue(object : Callback<JsonObject> {
+        api.callApiWithBody("login_api.php", rqBody).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
                 val jsonObject: JSONObject
                 if (response.isSuccessful) {
                     try {
                         jsonObject = JSONObject(response.body().toString())
                         if (jsonObject.optBoolean("Status")) {
-                            startActivity(Intent(this@SignIn, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                             val jsData = jsonObject.optJSONObject("data")
                             val pf = Profile(
                                 jsData.optString("id"),
@@ -68,6 +67,7 @@ class SignIn : BaseActivity() {
                                 jsData.optString("created")
                             )
                             pref.setPf(pf)
+                            startActivity(Intent(this@SignIn, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
                         }
                         Toast.makeText(this@SignIn, jsonObject.optString("Message"), Toast.LENGTH_SHORT).show()
                     } catch (e: JSONException) {
